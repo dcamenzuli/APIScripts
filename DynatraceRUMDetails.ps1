@@ -1,6 +1,6 @@
 # Author: Dean Camenzuli
 # Revision: v1.0
-# Date: 30/03/2018
+# Date: 30/07/2018
 #
 # Requirements: Access Dynatrace User Session Query endpoint.
 # Convert incoming JSON to parsable flat CSV file.
@@ -9,7 +9,7 @@
 #
 
 # ChangeLog
-# 1.0 | 30/03/2018 | Dean Camenzuli | Initial creation
+# 1.0 | 30/07/2018 | Dean Camenzuli | Initial creation
 #
 
 # Query used in API explorer
