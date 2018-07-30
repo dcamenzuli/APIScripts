@@ -13,7 +13,7 @@
 #
 
 # Query used in API explorer
-# SELECT userAction.Name, browserType, browserFamily, browserMajorVersion, AVG(userAction.networkTime), AVG(userAction.serverTime), AVG(userAction.frontendTime), AVG(userAction.visuallyCompleteTime), COUNT(*) FROM usersession GROUP BY userAction.Name, browserType, browserFamily, browserMajorVersion
+# SELECT userAction.Name, browserType, browserFamily,, browserMajorVersion, AVG(userAction.networkTime), AVG(userAction.serverTime), AVG(userAction.frontendTime), AVG(userAction.visuallyCompleteTime), COUNT(*) FROM usersession GROUP BY userAction.Name, browserType, browserFamily,, browserMajorVersion
 # 
 
 # helper function to turn PSCustomObject into a list of key/value pairs
@@ -34,12 +34,21 @@ function Get-ObjectMembers {
 $fileOut = "API Export.csv"
 $fileOutput = @()
 
+# Time variables to modify the request URL to run over the last 7 days instead of needing to generate a new request URL each run
+$numOfDays = Read-Host -Prompt "Report run over last 'X' days. `nSpecify X"
+$endTime = [Math]::Round(((Get-Date -Hour 0 -Minute 00 -second 00).ToFileTime() / 10000000 - 11644473600)*1000)
+$startTime = [Math]::Round((((Get-Date -Hour 0 -Minute 00 -second 00).AddDays(-$numOfDays)).ToFileTime() / 10000000 - 11644473600)*1000)
+
+"`nReport timeframe:"
+"Start Time: " + (Get-Date -Hour 0 -Minute 00 -second 00).AddDays(-$numOfDays)
+"End Time: " + (Get-Date -Hour 0 -Minute 00 -second 00)
+
 # Grab the jsonRequestURL (generated through API explorer) and convert it into a PSCustomObject
 $web_client = new-object System.Net.WebClient
-$jsonRequestURL = "[API REQUEST URL]"
+$jsonRequestURL = "[API REQUEST URL - INCLUDE THE START AND END TIME HERE]"
 $jsonContents = $web_client.DownloadString($jsonRequestURL) | ConvertFrom-Json
 
-"API Call Completed and loaded into PSCustomObject"
+"`nAPI Call Completed and loaded into PSCustomObject"
 
 # Convert the first part of the PSCustomObject into Key/Value Pairs
 $jsonEntities = $jsonContents.values | Get-ObjectMembers
@@ -94,3 +103,6 @@ foreach($i in $jsonEntities)
 
 # Export to csv
 $fileOutput | Export-CSV $fileOut -NoTypeInformation
+"`nLocation of export:"
+(Get-Item -Path ".\").FullName
+Read-Host -Prompt "`nExecution completed. Press enter to exit"
