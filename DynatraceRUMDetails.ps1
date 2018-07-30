@@ -40,8 +40,8 @@ $endTime = [Math]::Round(((Get-Date -Hour 0 -Minute 00 -second 00).ToFileTime() 
 $startTime = [Math]::Round((((Get-Date -Hour 0 -Minute 00 -second 00).AddDays(-$numOfDays)).ToFileTime() / 10000000 - 11644473600)*1000)
 
 "`nReport timeframe:"
-"Start Time: " + (Get-Date -Hour 0 -Minute 00 -second 00).AddDays(-$numOfDays)
-"End Time: " + (Get-Date -Hour 0 -Minute 00 -second 00)
+"Start Time: " + ((Get-Date -Hour 0 -Minute 00 -second 00).AddDays(-$numOfDays)).ToString("dd/MM/yyyy HH:mm:ss")
+"End Time: " + (Get-Date -Hour 0 -Minute 00 -second 00).ToString("dd/MM/yyyy HH:mm:ss")
 
 # Grab the jsonRequestURL (generated through API explorer) and convert it into a PSCustomObject
 $web_client = new-object System.Net.WebClient
