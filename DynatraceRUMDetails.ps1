@@ -83,7 +83,7 @@ foreach($i in $jsonEntities)
                 $serverTime = $c.value[1]/1000
                 $frontendTime = $c.value[2]/1000
                 $visuallyCompleteTime = $c.value[3]/1000
-                $sessionCount = $c.value[4]
+                $actionCount = $c.value[4]
 
                 # Assign the collected values to a row for export to excel
                 $row = New-Object PSObject
@@ -95,7 +95,7 @@ foreach($i in $jsonEntities)
                 $row | Add-Member -MemberType NoteProperty -Name 'Server Time' -Value $serverTime
                 $row | Add-Member -MemberType NoteProperty -Name 'Frontend Time' -Value $frontendTime
                 $row | Add-Member -MemberType NoteProperty -Name 'Visually Complete Time' -Value $visuallyCompleteTime
-                $row | Add-Member -MemberType NoteProperty -Name 'User Session Count' -Value $sessionCount
+                $row | Add-Member -MemberType NoteProperty -Name 'User Action Count' -Value $actionCount
                 $fileOutput += $row
             }
         }
