@@ -78,10 +78,11 @@ foreach($i in $jsonEntities)
             {
                 $browserMajorVersion = $c.key
 
-                $networkTime = $c.value[0]
-                $serverTime = $c.value[1]
-                $frontendTime = $c.value[2]
-                $visuallyCompleteTime = $c.value[3]
+                # time divided by 1000 to display in seconds
+                $networkTime = $c.value[0]/1000
+                $serverTime = $c.value[1]/1000
+                $frontendTime = $c.value[2]/1000
+                $visuallyCompleteTime = $c.value[3]/1000
                 $sessionCount = $c.value[4]
 
                 # Assign the collected values to a row for export to excel
