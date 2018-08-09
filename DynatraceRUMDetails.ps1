@@ -13,7 +13,7 @@
 #
 
 # Query used in API explorer
-# SELECT userAction.Name, browserType, browserFamily,, browserMajorVersion, AVG(userAction.networkTime), AVG(userAction.serverTime), AVG(userAction.frontendTime), AVG(userAction.visuallyCompleteTime), COUNT(*) FROM usersession GROUP BY userAction.Name, browserType, browserFamily,, browserMajorVersion
+# SELECT userAction.Name, browserType, browserFamily, browserMajorVersion, AVG(userAction.networkTime), AVG(userAction.serverTime), AVG(userAction.frontendTime), AVG(userAction.visuallyCompleteTime), COUNT(*) FROM usersession GROUP BY userAction.Name, browserType, browserFamily, browserMajorVersion
 # 
 
 # helper function to turn PSCustomObject into a list of key/value pairs
