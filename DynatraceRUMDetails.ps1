@@ -35,6 +35,8 @@ $fileOut = "API Export.csv"
 $fileOutput = @()
 
 # Time variables to modify the request URL to run over the last 7 days instead of needing to generate a new request URL each run
+$TenantID = Read-Host -Prompt "Please input your tenant ID: "
+$APIToken = Read-Host -Prompt "Please input your API Token: "
 $numOfDays = Read-Host -Prompt "Report run over last 'X' days. `nSpecify X"
 $endTime = [Math]::Round(((Get-Date -Hour 0 -Minute 00 -second 00).ToFileTime() / 10000000 - 11644473600)*1000)
 $startTime = [Math]::Round((((Get-Date -Hour 0 -Minute 00 -second 00).AddDays(-$numOfDays)).ToFileTime() / 10000000 - 11644473600)*1000)
@@ -45,7 +47,7 @@ $startTime = [Math]::Round((((Get-Date -Hour 0 -Minute 00 -second 00).AddDays(-$
 
 # Grab the jsonRequestURL (generated through API explorer) and convert it into a PSCustomObject
 $web_client = new-object System.Net.WebClient
-$jsonRequestURL = "[API REQUEST URL - INCLUDE THE START AND END TIME HERE]"
+$jsonRequestURL = "https://"+$TenantID"+.live.dynatrace.com/api/v1/userSessionQueryLanguage/tree?query=SELECT%20userAction.Name%2C%20browserType%2C%20browserFamily%2C%20browserMajorVersion%2C%20AVG(userAction.networkTime)%2C%20AVG(userAction.serverTime)%2C%20AVG(userAction.frontendTime)%2C%20AVG(userAction.visuallyCompleteTime)%2C%20COUNT(*)%20FROM%20usersession%20GROUP%20BY%20userAction.Name%2C%20browserType%2C%20browserFamily%2C%20browserMajorVersion&startTimestamp="+$startTime+"&endTimestamp="+$endTime+"&Api-Token="+$APIToken
 $jsonContents = $web_client.DownloadString($jsonRequestURL) | ConvertFrom-Json
 
 "`nAPI Call Completed and loaded into PSCustomObject"
