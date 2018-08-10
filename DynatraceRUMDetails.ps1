@@ -107,5 +107,5 @@ foreach($i in $jsonEntities)
 # Export to csv
 $fileOutput | Export-CSV $fileOut -NoTypeInformation
 "`nLocation of export:"
-(Get-Item -Path ".\").FullName
+(Get-Item -Path ".\").FullName +"\"+ $fileOut
 Read-Host -Prompt "`nExecution completed. Press enter to exit"
