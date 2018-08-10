@@ -26,8 +26,26 @@
   <img src="Edit_Token.png" width="800" title="Edit Token">
 </kbd>
 
-**5. Copy the Token value**
+**5. How to copy the Token value**
 
 <kbd>
   <img src="Copy_Token.png" width="400" title="Copy Token">
 </kbd>
+
+
+## Running the Script
+
+**1. Right click the script and select `Run with PowerShell`**
+
+**2. Paste your tenant ID in the requested field**
+
+**3. Paste your API Token in the requested field**
+
+**4. Select how many days prior to today you would like the extract taken over**
+
+**5. Press `Enter` to exit the script**
+
+<kbd>
+  <img src="ScriptRun.png" width="800" title="Script Run">
+</kbd>
+
